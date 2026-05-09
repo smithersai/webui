@@ -1,0 +1,19 @@
+# Refactor plan
+
+We're cleaning up auth. Three phases.
+
+| Phase | What | Effort | Risk |
+| ----- | ---- | ------ | ---- |
+| 1 | Extract auth middleware into a package | 1 day | low |
+| 2 | Migrate session store to Postgres | 3 days | medium |
+| 3 | Drop the Redis dependency | 1 hour | low |
+
+## Why now
+
+The current middleware leaks session tokens through query params. Legal flagged it.
+Phases 1 and 2 are sequential — we can't drop Redis until sessions live in Postgres.
+
+## Out of scope
+
+- Rotating the signing key (separate ticket)
+- Adding 2FA (Q3 roadmap)
