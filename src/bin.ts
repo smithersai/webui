@@ -1,11 +1,12 @@
 #!/usr/bin/env bun
 import { Cli, z } from 'incur'
+import pkg from '../package.json' with { type: 'json' }
 import { renderEvents } from './render.ts'
 
 export const cli = Cli.create('smithers-webui', {
   description:
     'Render React + MDX in a browser window. A skill + CLI for agents to present plans, dashboards, and rich UIs to users.',
-  version: '0.0.0',
+  version: pkg.version,
 })
   .command('render', {
     description:
